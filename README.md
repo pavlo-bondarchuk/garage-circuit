@@ -49,4 +49,13 @@ python3 -m http.server 8000 --directory dist
 
 Проверены синтаксис, геометрия 12 моделей, замыкание маршрута, диапазон передач 1–6 и предел баланса. Проверка на реальном сенсорном устройстве ещё не проведена. Физика и повреждения аркадные; автомобили — стилизованные интерпретации реальных моделей.
 
-Перенос в этот репозиторий сам по себе не включает GitHub Pages.
+## GitHub Pages
+
+В репозитории настроен `.github/workflows/pages.yml`: он проверяет JavaScript и публикует содержимое `dist` после изменений игры в `main`.
+
+Однократно включите Settings → Pages → Build and deployment → Source → GitHub Actions. Затем откройте Actions → Deploy game to GitHub Pages → Run workflow → main → Run workflow.
+
+После успешной публикации игра доступна по адресу https://pavlo-bondarchuk.github.io/garage-circuit/ . До включения Pages и успешного выполнения workflow адрес может возвращать 404.
+
+На новом домене localStorage отдельный, поэтому прогресс с предыдущего хостинга автоматически не переносится.
+
