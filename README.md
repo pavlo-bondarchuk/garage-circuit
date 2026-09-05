@@ -51,11 +51,12 @@ python3 -m http.server 8000 --directory dist
 
 ## GitHub Pages
 
-В репозитории настроен `.github/workflows/pages.yml`: он проверяет JavaScript и публикует содержимое `dist` после изменений игры в `main`.
+Готовая игра находится в корне ветки `gh-pages`, включая `.nojekyll`. Включите Settings → Pages → Source: Deploy from a branch → Branch: gh-pages → /(root) → Save.
 
-Однократно включите Settings → Pages → Build and deployment → Source → GitHub Actions. Затем откройте Actions → Deploy game to GitHub Pages → Run workflow → main → Run workflow.
+После успешной публикации адрес: https://pavlo-bondarchuk.github.io/garage-circuit/ . Доступность пока не подтверждена.
 
-После успешной публикации игра доступна по адресу https://pavlo-bondarchuk.github.io/garage-circuit/ . До включения Pages и успешного выполнения workflow адрес может возвращать 404.
+Запуск Actions остановлен GitHub из-за блокировки аккаунта по биллингу. Workflow `.github/workflows/pages.yml` оставлен для ручного запуска после устранения блокировки и переключения Pages Source на GitHub Actions. Публикация из ветки также зависит от ограничений аккаунта.
 
-На новом домене localStorage отдельный, поэтому прогресс с предыдущего хостинга автоматически не переносится.
+Ветка `gh-pages` содержит снимок версии 2. При изменениях `dist` её нужно обновлять отдельно. После восстановления Actions можно включить автоматическую публикацию.
 
+На другом домене localStorage отдельный: прогресс автоматически не переносится.
