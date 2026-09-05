@@ -31,6 +31,19 @@ focus:{...designs.golf,w:1.83,l:4.39,front:-.92,rear:1.76,rf:-.40,rr:1.33,roof:1
 bronco:{...designs.jeep,w:2.01,l:4.81,front:-1.00,rear:2.02,rf:-.71,rr:1.94,roof:1.93,wheel:.44,axles:[-1.48,1.46]}
 });
 
+const badgeTextures=new Map();
+function brandFor(id){if(['civic','accord','s2000'].includes(id))return 'HONDA';if(['model3','models'].includes(id))return 'TESLA';if(['rally','brz','forester'].includes(id))return 'SUBARU';if(['jeep','gladiator','cherokee'].includes(id))return 'Jeep';if(['pickup','mustang','focus','bronco'].includes(id))return 'Ford';return {'301':'PEUGEOT',golf:'VW',bmw:'BMW',rover:'LAND ROVER',gtr:'NISSAN',legend:'NISSAN',benz:'MERCEDES',truck:'VOLVO',drag:'DODGE'}[id]||id;}
+function badgeTexture(brand){if(badgeTextures.has(brand))return badgeTextures.get(brand);const canvas=document.createElement('canvas');canvas.width=256;canvas.height=256;const ctx=canvas.getContext('2d');ctx.fillStyle='#151b21';ctx.strokeStyle='#d9e1e5';ctx.lineWidth=9;ctx.beginPath();ctx.ellipse(128,128,brand==='Ford'||brand==='SUBARU'||brand==='LAND ROVER'?121:104,brand==='Ford'||brand==='SUBARU'||brand==='LAND ROVER'?66:104,0,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#edf1f4';ctx.textAlign='center';ctx.textBaseline='middle';
+if(brand==='BMW'){ctx.save();ctx.beginPath();ctx.arc(128,128,63,0,Math.PI*2);ctx.clip();for(let y=0;y<2;y++)for(let x=0;x<2;x++){ctx.fillStyle=(x+y)%2?'#eff4f5':'#4387be';ctx.fillRect(65+x*63,65+y*63,63,63);}ctx.restore();ctx.fillStyle='#eef3f5';ctx.font='bold 35px Arial';ctx.fillText('BMW',128,45);}
+else if(brand==='MERCEDES'){for(let i=0;i<3;i++){const a=i*Math.PI*2/3-Math.PI/2;ctx.beginPath();ctx.moveTo(128,128);ctx.lineTo(128+Math.cos(a)*91,128+Math.sin(a)*91);ctx.stroke();}}
+else if(brand==='VW'){ctx.font='bold 88px Arial';ctx.fillText('V',128,99);ctx.fillText('W',128,161);}
+else if(brand==='HONDA'){ctx.font='bold 160px Arial';ctx.fillText('H',128,126);}
+else if(brand==='TESLA'){ctx.font='bold 155px serif';ctx.fillText('T',128,126);}
+else if(brand==='SUBARU'){ctx.fillStyle='#396ba0';ctx.beginPath();ctx.ellipse(128,128,108,54,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#e9eff2';for(const [x,y,r] of [[76,122,23],[128,100,10],[159,111,10],[184,134,10],[145,142,10],[111,148,10]]){ctx.beginPath();ctx.moveTo(x-r,y);ctx.lineTo(x,y-r*.65);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r*.65);ctx.closePath();ctx.fill();}}
+else if(brand==='LAND ROVER'){ctx.fillStyle='#224a39';ctx.beginPath();ctx.ellipse(128,128,109,55,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#eef0d9';ctx.font='bold italic 34px Arial';ctx.fillText('LAND',128,108);ctx.fillText('ROVER',128,148);}
+else{ctx.font=brand==='Ford'?'italic bold 75px cursive':brand==='Jeep'?'bold 61px Arial':'bold 33px Arial';ctx.fillText(brand,128,128,190);}
+const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;badgeTextures.set(brand,texture);return texture;}
+
 export function createVehicle(c,color,upgrades={}){
 const d=designs[c.id]||designs['301'],g=new T.Group();g.name=c.name;g.userData={wheels:[],parts:[],modelVersion:4,bodyType:c.type};
 const painted=new T.Group(),detail=new T.Group();g.add(painted,detail);g.userData.parts.push(painted);
@@ -49,7 +62,7 @@ parent.updateWorldMatrix(true,true);const inverse=parent.matrixWorld.clone().inv
 parent.traverse(o=>{if(!o.isMesh)return;old.push(o);const geometry=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();geometry.applyMatrix4(new T.Matrix4().multiplyMatrices(inverse,o.matrixWorld));const key=o.material.uuid;let entry=buckets.get(key);if(!entry){entry={material:o.material,p:[],n:[],uv:[]};buckets.set(key,entry)}const pos=geometry.attributes.position,normal=geometry.attributes.normal,uv=geometry.attributes.uv;for(let i=0;i<pos.count;i++){entry.p.push(pos.getX(i),pos.getY(i),pos.getZ(i));entry.n.push(normal.getX(i),normal.getY(i),normal.getZ(i));entry.uv.push(uv?uv.getX(i):0,uv?uv.getY(i):0)}geometry.dispose()});
 parent.clear();old.forEach(o=>o.geometry.dispose());for(const b of buckets.values()){const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(b.p,3));geo.setAttribute('normal',new T.Float32BufferAttribute(b.n,3));geo.setAttribute('uv',new T.Float32BufferAttribute(b.uv,2));mesh(geo,b.material,parent);}
 }
-function finish(){[painted,detail,g.userData.hood,g.userData.engine,...g.userData.wheels].forEach(consolidate);g.userData.parts=[painted];return g;}
+function finish(){const brand=brandFor(c.id),bm=new T.MeshStandardMaterial({map:badgeTexture(brand),transparent:true,alphaTest:.1,metalness:.15,roughness:.4,depthWrite:false});const size=c.id==='truck'?.27:.17;const frontBadge=mesh(new T.PlaneGeometry(size,size),bm,detail);frontBadge.position.set(0,c.id==='truck'?1.40:d.nose-.11,c.id==='truck'?-3.245:front-.105);frontBadge.rotation.y=Math.PI;const rearBadge=mesh(new T.PlaneGeometry(size*.85,size*.85),bm,detail);rearBadge.position.set(0,d.tail-.13,back+.055);[painted,detail,g.userData.hood,g.userData.engine,...g.userData.wheels].forEach(consolidate);g.userData.parts=[painted];return g;}
 const front=-d.l/2,back=d.l/2,bottom=d.wheel*.73,fw=d.w*.455,sw=d.w/2;
 function shoulder(z){if(z<d.front)return T.MathUtils.lerp(d.nose,d.hood,(z-front)/(d.front-front));if(z>d.rear)return T.MathUtils.lerp(d.belt,d.tail,(z-d.rear)/(back-d.rear));return d.belt;}
 function width(z){const end=Math.max(0,(Math.abs(z)-(d.l/2-.6))/.6);return sw*(1-end*.10);}
@@ -79,8 +92,8 @@ for(const x of [-.32,.32])rod([x,by+.07,bf-.025],[x+.20,by+.105,bf+.03],.009,bla
 }
 function hoodAndEngine(){const pivot=new T.Group();pivot.position.set(0,d.hood,d.front);g.add(pivot);g.userData.hood=pivot;const len=d.front-front,ww=d.w*.443;
 const ys=d.nose-d.hood;doublePoly([[-ww,0,0],[ww,0,0],[ww*.94,ys,-len],[-ww*.94,ys,-len]],paint,pivot);
-for(const sign of [-1,1]){doublePoly([[sign*ww,0,0],[sign*ww*.94,ys,-len],[sign*ww*.67,ys+.026,-len*.94],[sign*ww*.69,.025,-.09]],paint,pivot);line([[sign*ww,0,0],[sign*ww*.94,ys,-len]],black,.006,pivot);}
-const engine=new T.Group();engine.position.set(0,d.hood-.20,(front+d.front)/2);g.add(engine);g.userData.engine=engine;
+for(const sign of [-1,1]){line([[sign*ww,0,0],[sign*ww*.94,ys,-len]],black,.006,pivot);}
+const engine=new T.Group();engine.position.set(0,Math.min(d.hood,d.nose)-.34,(front+d.front)/2);g.add(engine);g.userData.engine=engine;
 box(d.w*.73,.035,Math.max(.25,len-.12),0,-.06,0,black,engine);if(c.electric){box(d.w*.55,.12,len*.65,0,-.015,0,trim,engine);return;}box(.63,.23,Math.min(.72,len*.65),0,.055,0,chrome,engine);box(.5,.08,.45,0,.205,0,trim,engine);for(const sign of [-1,1])for(let i=0;i<4;i++)cylinder(.065,.23,sign*.26,.13,-.23+i*.14,chrome,engine,'x',8);
 box(.2,.17,.3,-.48,.035,.14,black,engine);box(.16,.17,.14,.49,.035,.13,mat('#ddd8bd'),engine);rod([-.38,.1,-.18],[-.53,.13,-.43],.055,trim,engine);if(upgrades.turbo)cylinder(.14,.17,.39,.13,-.2,chrome,engine,'x',10);
 }
