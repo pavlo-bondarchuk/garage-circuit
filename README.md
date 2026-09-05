@@ -51,12 +51,12 @@ python3 -m http.server 8000 --directory dist
 
 ## GitHub Pages
 
-Готовая игра находится в корне ветки `gh-pages`, включая `.nojekyll`. Включите Settings → Pages → Source: Deploy from a branch → Branch: gh-pages → /(root) → Save.
+Игра: https://pavlo-bondarchuk.github.io/garage-circuit/dist/
 
-После успешной публикации адрес: https://pavlo-bondarchuk.github.io/garage-circuit/ . Доступность пока не подтверждена.
+Главный адрес https://pavlo-bondarchuk.github.io/garage-circuit/ перенаправляет в `dist/`.
 
-Запуск Actions остановлен GitHub из-за блокировки аккаунта по биллингу. Workflow `.github/workflows/pages.yml` оставлен для ручного запуска после устранения блокировки и переключения Pages Source на GitHub Actions. Публикация из ветки также зависит от ограничений аккаунта.
+Источник публикации: Settings → Pages → Deploy from a branch → main → /(root). Стандартная публикация Pages из main работает; отдельный ручной workflow Actions получал ошибку блокировки аккаунта по биллингу и для этого способа не нужен.
 
-Ветка `gh-pages` содержит снимок версии 2. При изменениях `dist` её нужно обновлять отдельно. После восстановления Actions можно включить автоматическую публикацию.
+Изменения игры в `main/dist` публикуются стандартным механизмом Pages. Ветка `gh-pages` оставлена как резервный снимок версии 2; переключаться на неё не требуется.
 
 На другом домене localStorage отдельный: прогресс автоматически не переносится.
