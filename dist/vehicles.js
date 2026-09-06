@@ -51,8 +51,50 @@ camaro:{...designs.mustang,w:1.92,l:4.78,front:-.53,rear:1.43,rf:-.03,rr:.91,roo
 beetle:{...designs.golf,w:1.78,l:4.1,front:-1.14,rear:1.72,rf:-.45,rr:.80,roof:1.52,hood:.81,nose:.68,doors:2,axles:[-1.21,1.20]}
 });
 
+Object.assign(designs,{
+"volvofh12":{...designs["truck"],"roof":3.5},
+"scaniat":{...designs["scania"],"l":7.5,"roof":3.65,"axles":[-2.4, 1.6, 2.7]},
+"scaniastream":{...designs["scania"],"roof":4.0},
+"mantgxv8":{...designs["man"],"roof":3.8},
+"actrosmp3":{...designs["actros"],"roof":3.55},
+"dafxf":{...designs["daf"],"roof":3.75},
+"ivecostralis":{...designs["iveco"],"roof":3.55},
+"renaultt":{...designs["truck"],"roof":3.96},
+"kenworth":{...designs["truck"],"l":7.6,"roof":3.8,"axles":[-2.45, 1.9, 2.95]},
+"peterbilt":{...designs["truck"],"l":7.6,"roof":3.8,"axles":[-2.45, 1.9, 2.95]},
+"supradrag":{...designs["supra"],},
+"camarodrag":{...designs["camaro"],},
+"mustangdrag":{...designs["mustang"],},
+"gtrdrag":{...designs["gtr"],},
+"rx7drag":{...designs["rx7"],},
+"silviadrag":{...designs["silvia"],},
+"challengerdrag":{...designs["drag"],},
+"chevelledrag":{...designs["drag"],},
+"civicdrag":{...designs["civic"],},
+"corvettedrag":{...designs["benz"],},
+"lfa":{...designs["gtr"],"l":4.5,"roof":1.22,"front":-0.6,"rf":-0.15,"rear":1.3,"rr":0.76},
+"m4":{...designs["m5"],"l":4.79,"roof":1.39,"doors":2,"rear":1.35,"rr":0.79},
+"r8":{...designs["benz"],"l":4.43,"front":-0.84,"rf":-0.43,"rear":1.02,"rr":0.62,"roof":1.23},
+"c63":{...designs["accord"],"l":4.75,"rear":1.37,"rr":0.86},
+"gt86":{...designs["brz"],},
+"nsx":{...designs["rx7"],"l":4.43,"front":-0.8,"rf":-0.36,"rear":1.12,"rr":0.64,"roof":1.17},
+"ek9":{...designs["205"],"l":4.18,"rear":1.74,"rr":1.46,"roof":1.39},
+"mx5":{...designs["s2000"],"l":3.92,"roof":1.24,"axles":[-1.18, 1.12]},
+"mini":{...designs["205"],"l":3.86,"roof":1.43,"front":-0.73,"rf":-0.44,"rear":1.53,"rr":1.31},
+"clio":{...designs["fiesta"],"l":4.06,"roof":1.45},
+"i30":{...designs["golf"],"l":4.34,"roof":1.45},
+"stinger":{...designs["accord"],"l":4.83,"roof":1.4,"rr":1.12},
+"octavia":{...designs["accord"],"l":4.7,"roof":1.47,"rear":1.61,"rr":1.05},
+"volvo850":{...designs["rs6"],"l":4.71,"roof":1.43,"front":-0.99,"rf":-0.62,"rear":2.02,"rr":1.86},
+"viper":{...designs["benz"],"l":4.46,"roof":1.2,"front":-0.21,"rf":0.12,"rear":1.34,"rr":0.78},
+"corvette":{...designs["benz"],"l":4.49,"roof":1.2,"front":-0.38,"rf":0.02,"rr":0.86},
+"f40":{...designs["gtr"],"l":4.36,"roof":1.12,"front":-0.81,"rf":-0.36,"rear":1.14,"rr":0.68,"nose":0.54,"hood":0.72},
+"countach":{...designs["gtr"],"l":4.14,"roof":1.08,"front":-0.91,"rf":-0.48,"rear":0.99,"rr":0.68,"nose":0.48,"hood":0.67},
+"bentley":{...designs["mustang"],"l":4.85,"roof":1.4,"rw":0.79},
+"lc300":{...designs["cherokee"],"l":4.98,"roof":1.94,"rear":2.1,"rr":1.81,"nose":1.19,"hood":1.3,"belt":1.36}
+});
 const badgeTextures=new Map();
-function brandFor(id){const extra={scania:'SCANIA',man:'MAN',actros:'MERCEDES',daf:'DAF',iveco:'IVECO',evo:'MITSUBISHI',yaris:'TOYOTA',quattro:'AUDI',fiesta:'Ford','205':'PEUGEOT',supra:'TOYOTA',porsche:'PORSCHE',rx7:'MAZDA',silvia:'NISSAN','350z':'NISSAN',rs6:'AUDI',g63:'MERCEDES',m5:'BMW',camaro:'CHEVROLET',beetle:'VW'};if(extra[id])return extra[id];if(['civic','accord','s2000'].includes(id))return 'HONDA';if(['model3','models'].includes(id))return 'TESLA';if(['rally','brz','forester'].includes(id))return 'SUBARU';if(['jeep','gladiator','cherokee'].includes(id))return 'Jeep';if(['pickup','mustang','focus','bronco'].includes(id))return 'Ford';return {'301':'PEUGEOT',golf:'VW',bmw:'BMW',rover:'LAND ROVER',gtr:'NISSAN',legend:'NISSAN',benz:'MERCEDES',truck:'VOLVO',drag:'DODGE'}[id]||id;}
+function brandFor(id){const more={"volvofh12": "VOLVO", "scaniat": "SCANIA", "scaniastream": "SCANIA", "mantgxv8": "MAN", "actrosmp3": "MERCEDES", "dafxf": "DAF", "ivecostralis": "IVECO", "renaultt": "RENAULT", "kenworth": "KENWORTH", "peterbilt": "PETERBILT", "supradrag": "TOYOTA", "camarodrag": "CHEVROLET", "mustangdrag": "Ford", "gtrdrag": "NISSAN", "rx7drag": "MAZDA", "silviadrag": "NISSAN", "challengerdrag": "DODGE", "chevelledrag": "CHEVROLET", "civicdrag": "HONDA", "corvettedrag": "CHEVROLET", "lfa": "LEXUS", "m4": "BMW", "r8": "AUDI", "c63": "MERCEDES", "gt86": "TOYOTA", "nsx": "HONDA", "ek9": "HONDA", "mx5": "MAZDA", "mini": "MINI", "clio": "RENAULT", "i30": "HYUNDAI", "stinger": "KIA", "octavia": "SKODA", "volvo850": "VOLVO", "viper": "DODGE", "corvette": "CHEVROLET", "f40": "FERRARI", "countach": "LAMBORGHINI", "bentley": "BENTLEY", "lc300": "TOYOTA"};if(more[id])return more[id];const extra={scania:'SCANIA',man:'MAN',actros:'MERCEDES',daf:'DAF',iveco:'IVECO',evo:'MITSUBISHI',yaris:'TOYOTA',quattro:'AUDI',fiesta:'Ford','205':'PEUGEOT',supra:'TOYOTA',porsche:'PORSCHE',rx7:'MAZDA',silvia:'NISSAN','350z':'NISSAN',rs6:'AUDI',g63:'MERCEDES',m5:'BMW',camaro:'CHEVROLET',beetle:'VW'};if(extra[id])return extra[id];if(['civic','accord','s2000'].includes(id))return 'HONDA';if(['model3','models'].includes(id))return 'TESLA';if(['rally','brz','forester'].includes(id))return 'SUBARU';if(['jeep','gladiator','cherokee'].includes(id))return 'Jeep';if(['pickup','mustang','focus','bronco'].includes(id))return 'Ford';return {'301':'PEUGEOT',golf:'VW',bmw:'BMW',rover:'LAND ROVER',gtr:'NISSAN',legend:'NISSAN',benz:'MERCEDES',truck:'VOLVO',drag:'DODGE'}[id]||id;}
 function badgeTexture(brand){if(badgeTextures.has(brand))return badgeTextures.get(brand);const canvas=document.createElement('canvas');canvas.width=256;canvas.height=256;const ctx=canvas.getContext('2d');ctx.fillStyle='#151b21';ctx.strokeStyle='#d9e1e5';ctx.lineWidth=9;ctx.beginPath();ctx.ellipse(128,128,brand==='Ford'||brand==='SUBARU'||brand==='LAND ROVER'?121:104,brand==='Ford'||brand==='SUBARU'||brand==='LAND ROVER'?66:104,0,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#edf1f4';ctx.textAlign='center';ctx.textBaseline='middle';
 if(brand==='BMW'){ctx.save();ctx.beginPath();ctx.arc(128,128,63,0,Math.PI*2);ctx.clip();for(let y=0;y<2;y++)for(let x=0;x<2;x++){ctx.fillStyle=(x+y)%2?'#eff4f5':'#4387be';ctx.fillRect(65+x*63,65+y*63,63,63);}ctx.restore();ctx.fillStyle='#eef3f5';ctx.font='bold 35px Arial';ctx.fillText('BMW',128,45);}
 else if(brand==='MERCEDES'){for(let i=0;i<3;i++){const a=i*Math.PI*2/3-Math.PI/2;ctx.beginPath();ctx.moveTo(128,128);ctx.lineTo(128+Math.cos(a)*91,128+Math.sin(a)*91);ctx.stroke();}}
@@ -82,19 +124,19 @@ parent.updateWorldMatrix(true,true);const inverse=parent.matrixWorld.clone().inv
 parent.traverse(o=>{if(!o.isMesh)return;old.push(o);const geometry=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();geometry.applyMatrix4(new T.Matrix4().multiplyMatrices(inverse,o.matrixWorld));const key=o.material.uuid;let entry=buckets.get(key);if(!entry){entry={material:o.material,p:[],n:[],uv:[]};buckets.set(key,entry)}const pos=geometry.attributes.position,normal=geometry.attributes.normal,uv=geometry.attributes.uv;for(let i=0;i<pos.count;i++){entry.p.push(pos.getX(i),pos.getY(i),pos.getZ(i));entry.n.push(normal.getX(i),normal.getY(i),normal.getZ(i));entry.uv.push(uv?uv.getX(i):0,uv?uv.getY(i):0)}geometry.dispose()});
 parent.clear();old.forEach(o=>o.geometry.dispose());for(const b of buckets.values()){const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(b.p,3));geo.setAttribute('normal',new T.Float32BufferAttribute(b.n,3));geo.setAttribute('uv',new T.Float32BufferAttribute(b.uv,2));mesh(geo,b.material,parent);}
 }
-function finish(){const brand=brandFor(c.id),bm=new T.MeshStandardMaterial({map:badgeTexture(brand),transparent:true,alphaTest:.1,metalness:.15,roughness:.4,depthWrite:false});const size=c.type==='truck'?.27:.17;const frontBadge=mesh(new T.PlaneGeometry(size,size),bm,detail);frontBadge.position.set(0,c.type==='truck'?1.40:d.nose-.11,c.type==='truck'?-3.245:front-.105);frontBadge.rotation.y=Math.PI;const rearBadge=mesh(new T.PlaneGeometry(size*.85,size*.85),bm,detail);rearBadge.position.set(0,d.tail-.13,back+.055);[painted,detail,g.userData.hood,g.userData.engine,...g.userData.wheels].forEach(consolidate);g.userData.parts=[painted];return g;}
+function finish(){const brand=brandFor(c.id),bm=new T.MeshStandardMaterial({map:badgeTexture(brand),transparent:true,alphaTest:.1,metalness:.15,roughness:.4,depthWrite:false});const size=c.type==='truck'?.27:.17;const frontBadge=mesh(new T.PlaneGeometry(size,size),bm,detail);frontBadge.position.set(0,c.type==='truck'?1.40:d.nose-.11,c.type==='truck'?-3.245:front-.105);frontBadge.rotation.y=Math.PI;const rearBadge=mesh(new T.PlaneGeometry(size*.85,size*.85),bm,detail);rearBadge.position.set(0,d.tail-.13,back+.055);[painted,detail,g.userData.hood,g.userData.engine,...g.userData.wheels].forEach(consolidate);g.userData.parts=[painted];const exhaust=new T.Group();g.add(exhaust);g.userData.exhaust=exhaust;exhaust.visible=false;if(!c.electric){for(const side of [-1,1]){const jet=new T.Group();jet.position.set(side*d.w*.34,c.type==='truck'?.64:bottom+.025,back+.12);exhaust.add(jet);for(const [r,h,col,op] of [[.095,.65,0xff5318,.75],[.046,.42,0xffcf5a,.90],[.025,.20,0x8fbaff,.9]]){const geo=new T.ConeGeometry(r,h,7);geo.rotateX(Math.PI/2);geo.translate(0,0,h/2);const flame=new T.Mesh(geo,new T.MeshBasicMaterial({color:col,transparent:true,opacity:op,blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide}));jet.add(flame);}}}return g;}
 const front=-d.l/2,back=d.l/2,bottom=d.wheel*.73,fw=d.w*.455,sw=d.w/2;
 function shoulder(z){if(z<d.front)return T.MathUtils.lerp(d.nose,d.hood,(z-front)/(d.front-front));if(z>d.rear)return T.MathUtils.lerp(d.belt,d.tail,(z-d.rear)/(back-d.rear));return d.belt;}
 function width(z){const end=Math.max(0,(Math.abs(z)-(d.l/2-.6))/.6);return sw*(1-end*.10);}
 function archY(z){let y=bottom;for(const axle of d.axles){const t=Math.abs(z-axle),r=d.wheel*1.15;if(t<r)y=Math.max(y,d.wheel+Math.sqrt(r*r-t*t));}return y;}
-function body(){const zs=new Set([front,front+.18,d.front,d.rear,back-.18,back]);for(const axle of d.axles){const r=d.wheel*1.15;for(let i=0;i<=10;i++)zs.add(axle+Math.cos(i*Math.PI/10)*r);}const cuts=[...zs].filter(z=>z>=front&&z<=back).sort((a,b)=>a-b);
+function body(){const zs=new Set([front,front+.18,front+.6,d.front,d.rear,back-.6,back-.18,back]);for(const axle of d.axles){const r=d.wheel*1.15;for(let i=0;i<=10;i++)zs.add(axle+Math.cos(i*Math.PI/10)*r);}const cuts=[...zs].filter(z=>z>=front&&z<=back).sort((a,b)=>a-b);
 for(let i=0;i<cuts.length-1;i++){const z1=cuts[i],z2=cuts[i+1],h1=shoulder(z1),h2=shoulder(z2),w1=width(z1),w2=width(z2);for(const sign of [-1,1]){const low1=archY(z1),low2=archY(z2);doublePoly([[sign*w1,Math.max(low1,h1-.17),z1],[sign*w2,Math.max(low2,h2-.17),z2],[sign*w2*.93,h2,z2],[sign*w1*.93,h1,z1]]);if(low1<h1-.16||low2<h2-.16)doublePoly([[sign*w1*.96,low1,z1],[sign*w2*.96,low2,z2],[sign*w2,Math.max(low2,h2-.17),z2],[sign*w1,Math.max(low1,h1-.17),z1]]);}const hoodZone=z2<=d.front+.001,bedZone=c.type==='pickup'&&z1>d.rear-.001;if(!hoodZone&&!bedZone)doublePoly([[-w1*.93,h1,z1],[w1*.93,h1,z1],[w2*.93,h2,z2],[-w2*.93,h2,z2]]);}
 doublePoly([[-fw,bottom,front],[fw,bottom,front],[fw*.99,d.nose,front],[-fw*.99,d.nose,front]]);doublePoly([[fw,bottom,back],[-fw,bottom,back],[-fw*.99,d.tail,back],[fw*.99,d.tail,back]]);
 box(d.w*.65,.09,d.l-.65,0,bottom-.06,0,black,detail);
 for(const sign of [-1,1]){box(.10,.12,d.axles.at(-1)-d.axles[0]-d.wheel*2,sign*(sw-.04),bottom+.01,(d.axles.at(-1)+d.axles[0])/2,trim,detail);for(const axle of d.axles){const rr=d.wheel*1.15;for(let i=0;i<10;i++){const a=i*Math.PI/10,b=(i+1)*Math.PI/10,z1=axle+Math.cos(a)*rr,z2=axle+Math.cos(b)*rr,y1=d.wheel+Math.sin(a)*rr,y2=d.wheel+Math.sin(b)*rr;doublePoly([[sign*(sw+.035),y1,z1],[sign*(sw+.035),y2,z2],[sign*(sw+.015),y2+.065,z2],[sign*(sw+.015),y1+.065,z1]],['jeep','rover','pickup','bronco','gladiator','forester','cherokee'].includes(c.id)?trim:paint,['jeep','rover','pickup','bronco','gladiator','forester','cherokee'].includes(c.id)?detail:painted);}}}}
 function cabin(){const cabinGroup=new T.Group();painted.add(cabinGroup);const roofMat=['jeep','rover','bronco','gladiator'].includes(c.id)?trim:paint;
 const bf=d.front,br=d.rear,rf=d.rf,rr=d.rr,by=d.belt,ry=d.roof,bw=d.w*.455,rw=d.rw;
-doublePoly([[-rw,ry,rf],[rw,ry,rf],[rw,ry,rr],[-rw,ry,rr]],roofMat,cabinGroup);
+for(const side of [-1,1])doublePoly([[side*rw,ry,rf],[0,ry+.04,rf],[0,ry+.04,rr],[side*rw,ry,rr]],roofMat,cabinGroup);
 for(const sign of [-1,1]){doublePoly([[sign*bw,by,bf],[sign*rw,ry,rf],[sign*rw,ry,rr],[sign*bw,by,br]],paint,cabinGroup);
 const middle=bf+(br-bf)*(d.doors===4?.51:.65),roofMiddle=rf+(rr-rf)*(d.doors===4?.48:.66);
 const lowerX=sign*(bw+.012),upperX=sign*(rw+.012);
@@ -134,9 +176,9 @@ const ch=box(1.04,.22,5.8,0,.78,.35,trim,detail);for(const sign of [-1,1]){box(.
 box(2.34,1.05,2.25,0,1.54,-2.0,paint);const cab=box(2.33,d.roof-2.065,2.24,0,(d.roof+2.065)/2,-2.0,paint);g.userData.parts.push(cab);panel(2.02,.78,0,2.55,-3.135,glass);panel(2.06,.12,0,3.02,-3.16,trim);for(const sign of [-1,1]){box(.028,.76,1.35,sign*1.18,2.54,-2.18,glass,detail);box(.14,.4,.3,sign*1.39,2.39,-2.8,black,detail);rod([sign*1.15,2.71,-2.8],[sign*1.39,2.62,-2.8],.03,chrome);box(.055,.13,.3,sign*1.18,1.82,-1.60,black,detail);panel(.56,.16,sign*.79,1.02,-3.15,lamp);panel(.46,.10,sign*.79,.77,-3.16,lamp);}
 panel(1.64,.88,0,1.41,-3.15,black);for(let i=0;i<(c.id==='man'?3:c.id==='daf'?5:6);i++)panel(c.id==='scania'?1.75:1.53,c.id==='man'?.055:.026,0,1.09+i*(c.id==='man'?.23:.12),-3.17,chrome);rod([-.67,1.06,-3.19],[.67,1.75,-3.19],.017,chrome);cylinder(.11,.025,0,1.40,-3.21,chrome);cylinder(.075,.032,0,1.40,-3.23,black);
 box(2.38,.25,.3,0,.64,-3.13,trim,detail);box(2.10,.24,1.9,0,d.roof+.20,-1.91,paint);cylinder(.48,.11,0,1.0,1.61,black,detail,'y');box(1.9,.12,.28,0,.66,back,trim,detail);for(const sign of [-1,1])panel(.32,.13,sign*.76,.65,back+.15,red);
-if(c.id==='scania'){box(2.18,.11,.16,0,d.roof+.36,-2.73,chrome,detail);for(const x of [-.78,-.39,0,.39,.78])cylinder(.09,.08,x,d.roof+.36,-2.83,lamp);}if(c.id==='actros')for(const side of [-1,1])box(.045,.42,.13,side*1.34,2.56,-2.76,black,detail);if(c.id==='iveco')panel(1.60,.10,0,1.94,-3.17,chrome);if(c.id==='daf')panel(2.12,.12,0,3.07,-3.17,trim);const pivot=new T.Group();pivot.position.set(0,1.1,-3.12);g.add(pivot);g.updateMatrixWorld(true);for(const parent of [painted,detail])for(const child of [...parent.children]){const bb=new T.Box3().setFromObject(child);if(bb.min.y>1.05&&bb.max.z<-.75)pivot.attach(child);}g.userData.hood=pivot;const engine=new T.Group();g.add(engine);g.userData.engine=engine;box(.8,.4,1,0,1.14,-1.8,chrome,engine);wheels();return finish();
+if(c.id==='scania'){box(2.18,.11,.16,0,d.roof+.36,-2.73,chrome,detail);for(const x of [-.78,-.39,0,.39,.78])cylinder(.09,.08,x,d.roof+.36,-2.83,lamp);}if(c.id==='actros')for(const side of [-1,1])box(.045,.42,.13,side*1.34,2.56,-2.76,black,detail);if(c.id==='iveco')panel(1.60,.10,0,1.94,-3.17,chrome);if(c.id==='daf')panel(2.12,.12,0,3.07,-3.17,trim);const pivot=new T.Group();pivot.position.set(0,1.1,-3.12);g.add(pivot);g.updateMatrixWorld(true);for(const parent of [painted,detail])for(const child of [...parent.children]){const bb=new T.Box3().setFromObject(child);if(bb.min.y>1.05&&bb.max.z<-.75){pivot.attach(child);if(['scaniat','kenworth','peterbilt'].includes(c.id))child.position.z+=1.05;}}if(['scaniat','kenworth','peterbilt'].includes(c.id)){box(1.45,.70,1.35,0,1.48,-2.54,paint);for(const side of [-1,1]){box(.09,1.8,.09,side*1.13,2.0,-.65,chrome,detail);box(.38,.17,1.18,side*1.02,1.02,-2.50,paint);}}g.userData.hood=pivot;const engine=new T.Group();g.add(engine);g.userData.engine=engine;box(.8,.4,1,0,1.14,-1.8,chrome,engine);wheels();return finish();
 }
-body();if(c.id==='s2000'){doublePoly([[-.72,d.belt,d.front],[-.65,d.roof,d.rf],[.65,d.roof,d.rf],[.72,d.belt,d.front]],glass,detail);for(const sign of [-1,1]){rod([sign*.72,d.belt,d.front],[sign*.65,d.roof,d.rf],.028,chrome);box(.43,.10,.49,sign*.40,d.belt+.02,.37,black,detail);box(.40,.38,.13,sign*.40,d.belt+.21,.63,black,detail);cylinder(.13,.05,sign*.4,d.belt+.42,.68,trim);}rod([-.65,d.roof,d.rf],[.65,d.roof,d.rf],.025,chrome);}else cabin();hoodAndEngine();wheels();rear();
+body();if(['s2000','mx5'].includes(c.id)){doublePoly([[-.72,d.belt,d.front],[-.65,d.roof,d.rf],[.65,d.roof,d.rf],[.72,d.belt,d.front]],glass,detail);for(const sign of [-1,1]){rod([sign*.72,d.belt,d.front],[sign*.65,d.roof,d.rf],.028,chrome);box(.43,.10,.49,sign*.40,d.belt+.02,.37,black,detail);box(.40,.38,.13,sign*.40,d.belt+.21,.63,black,detail);cylinder(.13,.05,sign*.4,d.belt+.42,.68,trim);}rod([-.65,d.roof,d.rf],[.65,d.roof,d.rf],.025,chrome);}else cabin();hoodAndEngine();wheels();rear();
 if(c.id==='301'){frontGrille(.92,.23,d.nose-.16);for(const sign of [-1,1]){headlight(sign);panel(.21,.095,sign*.62,bottom+.1,front-.07,chrome);}line([[-.45,d.nose-.04,front-.05],[0,d.nose-.025,front-.05],[.45,d.nose-.04,front-.05]],chrome,.014);box(.055,.07,.025,0,d.nose-.15,front-.061,chrome,detail);}
 if(c.id==='golf'){frontGrille(1.1,.14,d.nose-.10);panel(1.56,.022,0,d.nose-.04,front-.061,red);for(const sign of [-1,1])headlight(sign);cylinder(.075,.035,0,d.nose-.11,front-.07,chrome);cylinder(.045,.04,0,d.nose-.11,front-.08,black);panel(1.12,.17,0,bottom+.12,front-.07,black);}
 if(c.id==='bmw'){frontGrille(1.5,.23,d.nose-.12);for(const sign of [-1,1]){for(const x of [.47,.71]){cylinder(.12,.045,sign*x,d.nose-.10,front-.057,chrome);cylinder(.091,.054,sign*x,d.nose-.1,front-.07,lamp);}panel(.15,.22,sign*.10,d.nose-.12,front-.078,chrome);panel(.105,.17,sign*.10,d.nose-.12,front-.094,black);}panel(1.04,.15,0,bottom+.11,front-.06,black);spoiler(.13);}
@@ -179,5 +221,14 @@ if(c.id==='camaro')panel(1.18,.035,0,d.nose-.075,front-.07,black);
 }
 if(['porsche','beetle','g63'].includes(c.id)){frontGrille(c.id==='g63'?1.02:.85,.19,d.nose-.13);for(const side of [-1,1]){headlight(side,'round');if(c.id==='porsche'||c.id==='beetle')box(.27,.07,.38,side*.62,d.nose-.02,front+.15,paint);}if(c.id==='g63'){for(let i=0;i<9;i++)panel(.018,.18,-.36+i*.09,d.nose-.13,front-.06,chrome);cylinder(.40,.23,0,1.08,back+.17,trim);for(const side of [-1,1])box(.16,.07,2.10,side*(sw+.03),.43,.04,chrome,detail);}}
 
-if(upgrades.spoiler&&!['gtr','legend','bmw','rally','civic','focus','evo','yaris','quattro','fiesta','205','supra'].includes(c.id))spoiler(.25);return finish();
+
+if(["supradrag", "camarodrag", "mustangdrag", "gtrdrag", "rx7drag", "silviadrag", "challengerdrag", "chevelledrag", "civicdrag", "corvettedrag", "lfa", "m4", "r8", "c63", "gt86", "nsx", "ek9", "mx5", "mini", "clio", "i30", "stinger", "octavia", "volvo850", "viper", "corvette", "f40", "countach", "bentley", "lc300"].includes(c.id)){frontGrille(['countach','f40','r8'].includes(c.id)?.86:1.07,['countach','f40'].includes(c.id)?.12:.22,d.nose-.13);for(const side of [-1,1]){headlight(side,['mini','bentley'].includes(c.id)?'round':'angular');panel(.22,.10,side*d.w*.36,bottom+.11,front-.06,black);}
+if(['m4','bentley','lfa','lc300'].includes(c.id)){for(let i=0;i<9;i++)panel(.015,.17,-.36+i*.09,d.nose-.13,front-.067,chrome);}
+if(['f40','countach'].includes(c.id)){spoiler(.36);for(const side of [-1,1]){box(.032,.20,.42,side*(sw+.025),d.belt-.10,1.05,black,detail);box(.16,.05,2.1,side*sw,bottom-.025,0,trim,detail);}}
+if(['nsx','rx7drag'].includes(c.id))for(const side of [-1,1])box(.27,.05,.31,side*.52,shoulder(front+.25)+.01,front+.25,paint);
+if(['volvo850','lc300'].includes(c.id))for(const side of [-1,1])box(.045,.04,2.20,side*.67,d.roof+.065,.40,trim,detail);
+}
+if(["supradrag", "camarodrag", "mustangdrag", "gtrdrag", "rx7drag", "silviadrag", "challengerdrag", "chevelledrag", "civicdrag", "corvettedrag"].includes(c.id)){spoiler(.25);for(const wheel of g.userData.wheels)if(wheel.position.z>0)wheel.scale.x=1.5;for(const side of [-1,1]){rod([side*.51,.22,back-.05],[side*.51,.16,back+.67],.022,chrome);cylinder(.072,.08,side*.51,.10,back+.67,rubber,detail,'x',10);}box(.28,.28,.21,0,bottom+.22,back+.10,black,detail);box(d.w*.97,.045,.25,0,bottom-.02,front-.06,trim,detail);}
+
+if(upgrades.spoiler&&c.type!=='drag'&&!['gtr','legend','bmw','rally','civic','focus','evo','yaris','quattro','fiesta','205','supra'].includes(c.id))spoiler(.25);return finish();
 }
