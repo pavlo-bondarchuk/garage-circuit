@@ -1,6 +1,6 @@
 import * as T from './three.module.js';
 import { DragEngine, makeCourse, courseMesh, terrainMesh, GREEN_MIN, GREEN_MAX } from './racing.js?v=11';
-import { createVehicle } from './vehicles.js?v=9';
+import { createVehicle } from './vehicles.js?v=13';
 const $=id=>document.getElementById(id),fmt=n=>Math.round(n).toLocaleString('ru-RU')+' $',LIMIT=100_000_000_000_000;
 const cars=[
 {id:'301',name:'Peugeot 301',type:'sedan',price:23000,hp:115,max:188,drive:'FWD',color:'#aaba96'},
